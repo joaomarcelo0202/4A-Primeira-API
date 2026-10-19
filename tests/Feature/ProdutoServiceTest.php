@@ -27,7 +27,6 @@ class ProdutoServiceTest extends TestCase
         $produto = $this->criarProduto();
         $service = new ProdutoService();
 
-        // Novo custo 200 -> preço mínimo 220. Preço 250 está ok.
         $atualizado = $service->update($produto, [
             'nome' => 'Cimento CP II',
             'preco_custo' => 200,
@@ -49,14 +48,12 @@ class ProdutoServiceTest extends TestCase
         $service = new ProdutoService();
 
         try {
-            // Só manda o preço: o custo atual (100) é usado -> mínimo 110.
             $service->update($produto, ['preco' => 105]);
             $this->fail('Era esperado uma ValidationException.');
         } catch (ValidationException $e) {
             $this->assertArrayHasKey('preco', $e->errors());
         }
 
-        // O produto continua com o preço antigo
         $this->assertDatabaseHas('produtos', [
             'id' => $produto->id,
             'preco' => 120,

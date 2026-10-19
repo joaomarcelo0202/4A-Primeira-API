@@ -26,7 +26,6 @@ class ApiProdutoTest extends TestCase
 
     public function test_nao_cria_produto_com_margem_abaixo_da_minima(): void
     {
-        // Custo 100 -> preço mínimo 110. Com 105 deve ser recusado.
         $this->postJson('/api/produtos', [
             'nome' => 'Tijolo',
             'preco_custo' => 100,

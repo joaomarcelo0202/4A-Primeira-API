@@ -18,8 +18,6 @@ class ProdutoService
 
     public function update(Produto $produto, array $dados)
     {
-        // No update os campos são opcionais ('sometimes'),
-        // então se não vier o preço ou o custo usamos o valor atual do produto
         $preco = $dados['preco'] ?? $produto->preco;
         $preco_custo = $dados['preco_custo'] ?? $produto->preco_custo;
 
