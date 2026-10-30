@@ -25,7 +25,7 @@ class ProdutoServiceTest extends TestCase
     public function test_update_atualiza_produto_com_margem_correta(): void
     {
         $produto = $this->criarProduto();
-        $service = new ProdutoService();
+        $service = app(ProdutoService::class);
 
         $atualizado = $service->update($produto, [
             'nome' => 'Cimento CP II',
@@ -45,7 +45,7 @@ class ProdutoServiceTest extends TestCase
     public function test_update_nao_atualiza_produto_com_margem_abaixo_da_minima(): void
     {
         $produto = $this->criarProduto();
-        $service = new ProdutoService();
+        $service = app(ProdutoService::class);
 
         try {
             $service->update($produto, ['preco' => 105]);
