@@ -14,6 +14,15 @@ class EloquentProdutoRepository implements ProdutoRepositoryInterface
                     fn ($query, $busca) => $query->where('nome', 'ILIKE', 
                     "%{$busca}%")
                 )
+                ->when($filtros['preco_min'] ?? null,
+                    fn ($query, $precoMin) => $query->where('preco', '>=', $precoMin)
+                )
+                ->when($filtros['preco_max'] ?? null,
+                    fn ($query, $precoMax) => $query->where('preco', '<=', $precoMax)
+                )
+                ->when($filtros['em_estoque'] ?? null,
+                    fn ($query) => $query->where('estoque', '>', 0)
+                )
                 ->paginate($porPagina);
     }
 
