@@ -32,9 +32,12 @@ class ProdutoService
 
         $this->verificarMargem($preco, $preco_custo);
 
-        $produto->update($dados);
+        return $this->produtos->update($produto, $dados);
+    }
 
-        return $produto;
+    public function delete(Produto $produto): void
+    {
+        $this->produtos->delete($produto);
     }
 
     private function verificarMargem(float $preco, float $preco_custo)

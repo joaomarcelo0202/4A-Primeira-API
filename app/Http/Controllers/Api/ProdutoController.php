@@ -65,7 +65,7 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
-        $produto->delete();
+        $this->service->delete($produto);
         return response()->noContent(); // 204
     }
 
